@@ -41,8 +41,8 @@ app.post('/webhook', function(req, res) {
   res.end(JSON.stringify(req.body));
 });
 
-app.listen(3000, function(err) {
+app.listen(3069, function(err) {
   if (err) console.err(err);
 
-  console.log('server is listening on 3000');
+  console.log('server is listening on 3069');
 })
