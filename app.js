@@ -1,7 +1,8 @@
 'use strict';
 
 const express = require('express');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const _ = require('lodash');
 
 let app = express();
 
@@ -21,7 +22,17 @@ app.post('/', function(req, res) {
 });
 
 app.get('/webhook', function(req, res) {
-  res.end('ok men');
+  let params = req.query;
+
+  console.log('query params', params);
+
+  if (_.isEmpty(params) || _.isEmpty(params['hub.challenge'])) {
+    res.status(400);
+    res.end('params is undefined!');
+    return;
+  }
+
+  return res.end(params['hub.challenge']);
 });
 
 app.post('/webhook', function(req, res) {
